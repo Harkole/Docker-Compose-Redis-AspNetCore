@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  web:
+    image: dockerapi:latest
+    container_name: dockerapi
+    depends_on:
+      - "redis_image"
+    build:
+      context: ./dockerapi
+      dockerfile: Dockerfile
+    ports:
+      - "80:5000"
+      - "443:5001"
+    links:
+      - "redis_image"
+    environment:
+      - RedisConnection=redis_image
+
+  redis_image:
+    image: redis
+    container_name: redis.cache
+    ports:
+      - "6379:6379"
