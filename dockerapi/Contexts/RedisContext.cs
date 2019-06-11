@@ -20,6 +20,10 @@ namespace dockerapi.Contexts
 
         private static Lazy<ConnectionMultiplexer> lazyConnection;
 
+        /// <summary>
+        /// Returns the Redis Connection(s) for communicating with the server
+        /// </summary>
+        /// <value></value>
         public static ConnectionMultiplexer Connection
         {
             get
@@ -28,6 +32,9 @@ namespace dockerapi.Contexts
             }
         }
 
+        /// <summary>
+        /// Constructor... Creates the singleton connection object when required
+        /// </summary>
         static RedisContext()
         {
             RedisContext.lazyConnection = new Lazy<ConnectionMultiplexer>(() => 

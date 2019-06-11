@@ -12,6 +12,13 @@ namespace dockerapi.Controllers
     [ApiController]
     public class RedisExamples : ControllerBase
     {
+        /// <summary>
+        /// Generate random numbers to place in the Redis cache, defaults to 5 values
+        /// but can be set by passing numValues on the query string to generate any
+        /// number of values
+        /// </summary>
+        /// <param name="numValues">Optional, the number of values to generate</param>
+        /// <returns>Accepted response</returns>
         [HttpPost]
         public IActionResult StoreRandomNumbers([FromQuery]int numValues = 5)
         {
@@ -33,6 +40,11 @@ namespace dockerapi.Controllers
             return Accepted();
         }
 
+        /// <summary>
+        /// Returns the information currently stored in Redis
+        /// </summary>
+        /// <param name="numValues">The number of values to return</param>
+        /// <returns>null if no value is found at that index, else an array of values from Redis</returns>
         [HttpGet]
         public IActionResult GetCurrentStoredValues([FromQuery]int numValues = 5)
         {
