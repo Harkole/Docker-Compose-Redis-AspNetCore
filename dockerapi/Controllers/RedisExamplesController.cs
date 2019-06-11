@@ -30,6 +30,10 @@ namespace dockerapi.Controllers
                 for (int i = 0; i < numValues; i++)
                 {
                     cache.StringSet($"KeyValue:{i}", rnd.Next(0, 1000));
+                    
+                    // https://redis.io/commands/expire
+                    // Set all keys to not live for more than 24 hours
+                    cache.KeyExpire($"KeyValue:{i}", new TimeSpan(23, 59, 59));
                 }
             }
             catch (Exception ex)
